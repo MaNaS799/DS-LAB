@@ -24,24 +24,6 @@ int main() {
     }
 
     
-    cout << "The matrix is:" << endl;
-    for(int i = 0; i < n; i++) {
-        index = 0;
-        for(int k = 0; k < i; k++)
-            index += k + 1;  
-        for(int j = 0; j < n; j++) {
-            if(j <= i)
-                cout << symm[index + j] << " ";
-            else {
-                
-                int mirror_index = 0;
-                for(int k = 0; k < j; k++)
-                    mirror_index += k + 1;
-                cout << symm[mirror_index + i] << " ";
-            }
-        }
-        cout << endl;
-    }
-
+    
     return 0;
 }
