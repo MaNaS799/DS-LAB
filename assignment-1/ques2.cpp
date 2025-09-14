@@ -1,31 +1,37 @@
 #include <iostream>
 using namespace std;
 
+void deleteAt(int arr[], int &n, int index) {
+    for (int i = index; i < n - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    n--; 
+}
+
 int main() {
-    int n;
-    cout << "Enter size of array: ";
+    int arr[100], n;
+
+    cout << "Enter number of elements: ";
     cin >> n;
 
-    int arr[100];
-    cout << "Enter " << n << " numbers:\n";
+    cout << "Enter elements: ";
     for (int i = 0; i < n; i++) {
         cin >> arr[i];
     }
 
+    
     for (int i = 0; i < n; i++) {
-        for (int j = i + 1; j < n; j++) {
+        for (int j = i + 1; j < n; ) {
             if (arr[i] == arr[j]) {
-                // shift left
-                for (int k = j; k < n - 1; k++) {
-                    arr[k] = arr[k + 1];
-                }
-                n--;
-                j--;
+                deleteAt(arr, n, j); 
+            } else {
+                j++; 
             }
         }
     }
 
-    cout << "Array after removing duplicates:\n";
+    
+    cout << "Array after removing duplicates: ";
     for (int i = 0; i < n; i++) {
         cout << arr[i] << " ";
     }
