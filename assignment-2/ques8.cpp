@@ -2,32 +2,35 @@
 using namespace std;
 
 int main() {
-    int size;
-	cout<<"Enter the size of the array"<<endl;
-	cin>>size;
-	
-	int arr[size];
-	cout<<"Enter the elements of the array"<<endl;
-	for(int i=0;i<size;i++){
-		cin>>arr[i];
-	}
+    int n;
+    cout << "Enter size of array: ";
+    cin >> n;
 
-	int counter[255]={};
-	
-	for(int i=0;i<size;i++){
-		int help=arr[i];
-		counter[help]++;
-	}
-	
-	int count =0;
-	
-	for(int i=0;i<255;i++){
-		if(counter[i]>0){
-			count++;
-		}
-	}
-	
-	cout<<endl<<"Number of unique elements are: "<<count;
-	
-	return 0;
+    int arr[100];  
+    cout << "Enter elements of array:\n";
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        bool isDuplicate = false;
+        
+        
+        for (int j = 0; j < i; j++) {
+            if (arr[i] == arr[j]) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        
+        
+        if (!isDuplicate) {
+            count++;
+        }
+    }
+
+    cout << "Number of distinct integers: " << count << endl;
+
+    return 0;
 }
