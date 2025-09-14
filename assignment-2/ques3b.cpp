@@ -2,29 +2,21 @@
 using namespace std;
 
 int main() {
-    int n;
-    cout << "Enter n (range 1 to n): ";
-    cin >> n;
+    int arr[] = {1,2,3,4,5,7,8,9,10,11};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    
+    int low = 0, high = n - 1, mid;
 
-    int arr[n];
-    cout << "Enter " << n - 1 << " elements in sorted order: ";
-    for (int i = 0; i < n - 1; i++) {
-        cin >> arr[i];
-    }
+    while (low < high) {
+        mid = (low + high) / 2;
 
-    int first = 0, last = n - 2, ans = n;
-    while (first <= last) {
-        int mid = (first + last) / 2;
-        if (arr[mid] == mid + 1) {
-            first = mid + 1;
-        }
-        else {
-            ans = mid + 1;
-            last = mid - 1;
+        if (arr[mid] != mid + 1) {
+            high = mid;  
+        } else {
+            low = mid + 1;  
         }
     }
 
-    cout << "Missing number is: " << ans << endl;
-
+    cout << "The missing number is: " << low + 1 << endl;
     return 0;
 }
