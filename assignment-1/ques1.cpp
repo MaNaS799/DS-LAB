@@ -2,115 +2,104 @@
 using namespace std;
 
 int main() {
-    int ch, arr[50], size = 0, pos, ele;
+    int arr[100];   
+    int n = 0;      
+    int choice;
 
-    cout << "---MENU---" << endl;
-    cout << "1.CREATE" << endl;
-    cout << "2.DISPLAY" << endl;
-    cout << "3.INSERT" << endl;
-    cout << "4.DELETE" << endl;
-    cout << "5.LINEAR SEARCH" << endl;
-    cout << "6.EXIT" << endl;
+    do {
+        cout << "\n---- MENU ----\n";
+        cout << "1. CREATE\n";
+        cout << "2. DISPLAY\n";
+        cout << "3. INSERT\n";
+        cout << "4. DELETE\n";
+        cout << "5. LINEAR SEARCH\n";
+        cout << "6. EXIT\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
 
-    cout << "Enter your choice number: ";
-    cin >> ch;
-
-    switch (ch) {
-        case 1:
-            cout << "How many elements do you want to enter? ";
-            cin >> size;
-            cout << "Enter " << size << " elements: ";
-            for (int i = 0; i < size; i++) {
-                cin >> arr[i];
-            }
-            cout << "Array created successfully :)" << endl;
-            break;
-
-        case 2:
-            if (size == 0) {
-                cout << "Array is empty." << endl;
+        switch (choice) {
+            case 1: { 
+                cout << "Enter number of elements: ";
+                cin >> n;
+                cout << "Enter elements: ";
+                for (int i = 0; i < n; i++) {
+                    cin >> arr[i];
+                }
                 break;
             }
-            cout << "Array elements: ";
-            for (int i = 0; i < size; i++) {
-                cout << arr[i] << " ";
+            case 2: { 
+                if (n == 0) cout << "Array is empty.\n";
+                else {
+                    cout << "Array elements: ";
+                    for (int i = 0; i < n; i++)
+                        cout << arr[i] << " ";
+                    cout << endl;
+                }
+                break;
             }
-            cout << endl;
-            break;
+            case 3: { 
+                int pos, val;
+                cout << "Enter position (1 to " << n+1 << "): ";
+                cin >> pos;
+                cout << "Enter value: ";
+                cin >> val;
 
-        case 3:
-            if (size == 0) {
-                cout << "Array is empty. Create it first." << endl;
+                if (pos < 1 || pos > n+1) {
+                    cout << "Invalid position!\n";
+                } else {
+                    for (int i = n; i >= pos; i--) {
+                        arr[i] = arr[i-1];
+                    }
+                    arr[pos-1] = val;
+                    n++;
+                }
                 break;
             }
-            cout << "Enter element to insert: ";
-            cin >> ele;
-            cout << "At what position? (1 to " << size + 1 << "): ";
-            cin >> pos;
-            if (pos < 1 || pos > size + 1) {
-                cout << "Invalid position!" << endl;
-                break;
-            }
-            for (int i = size; i >= pos; i--) {
-                arr[i] = arr[i - 1];
-            }
-            arr[pos - 1] = ele;
-            size++;
-            cout << "Element inserted successfully :)" << endl;
-            break;
+            case 4: { 
+                int val, index = -1;
+                cout << "Enter value to delete: ";
+                cin >> val;
 
-        case 4:
-            if (size == 0) {
-                cout << "Array is empty. Nothing to delete." << endl;
-                break;
-            }
-            cout << "Array contains: ";
-            for (int i = 0; i < size; i++) {
-                cout << arr[i] << " ";
-            }
-            cout << endl;
-            cout << "Which element to delete (position)? ";
-            cin >> pos;
-            if (pos < 1 || pos > size) {
-                cout << "Invalid position!" << endl;
-                break;
-            }
-            for (int i = pos - 1; i < size - 1; i++) {
-                arr[i] = arr[i + 1];
-            }
-            size--;
-            cout << "Element deleted successfully :)" << endl;
-            break;
-
-        case 5:
-            if (size == 0) {
-                cout << "Array is empty." << endl;
-                break;
-            }
-            cout << "Enter the search element: ";
-            cin >> ele;
-            {
-                int found = 0;
-                for (int i = 0; i < size; i++) {
-                    if (arr[i] == ele) {
-                        cout << "Element found at position " << i + 1 << endl;
-                        found = 1;
+                for (int i = 0; i < n; i++) {
+                    if (arr[i] == val) {
+                        index = i;
                         break;
                     }
                 }
-                if (!found)
-                    cout << "Element not found." << endl;
+                if (index == -1) cout << "Element not found!\n";
+                else {
+                    for (int i = index; i < n-1; i++) {
+                        arr[i] = arr[i+1];
+                    }
+                    n--;
+                    cout << "Element deleted.\n";
+                }
+                break;
             }
-            break;
+            case 5: { 
+                int key, found = -1;
+                cout << "Enter value to search: ";
+                cin >> key;
 
-        case 6:
-            cout << "------END------" << endl;
-            break;
+                for (int i = 0; i < n; i++) {
+                    if (arr[i] == key) {
+                        found = i;
+                        break;
+                    }
+                }
+                if (found == -1) cout << "Element not found.\n";
+                else cout << "Element found at position " << found+1 << endl;
+                break;
+            }
+            case 6:
+                cout << "Exiting program.\n";
+                break;
 
-        default:
-            cout << "Enter a valid choice!" << endl;
-    }
+            default:
+                cout << "Invalid choice!\n";
+        }
+
+    } while (choice != 6);
 
     return 0;
 }
-
